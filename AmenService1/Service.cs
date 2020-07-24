@@ -38,6 +38,7 @@ namespace AmenService1
 
         csCommunication objComm = new csCommunication();
         csService_Providers sp = new csService_Providers();
+        csReports objReport = new csReports();
 
         #region Attrition
 
@@ -6132,6 +6133,162 @@ namespace AmenService1
         }
         #endregion
 
+
+        #endregion
+
+        #region Reports
+
+        #region Filters
+
+        [OperationContract]
+        [Description("Returns Filter1")]
+        [WebInvoke(Method = "GET",
+            BodyStyle = WebMessageBodyStyle.WrappedRequest,
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "ReportFilter1({secToken})")]
+        public string GetReportFilter1(string secToken)
+        {
+            DataTable dt = new DataTable();
+            DataTable dtUser = new DataTable();
+            dtUser = objUser.viewServiceSecTokenSelectBySecToken1(secToken);
+
+            if (dtUser.Rows.Count == 0)
+            {
+
+            }
+            else
+            {
+                dt = objReport.ViewReport_Filter1();
+            }
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+            Dictionary<string, object> row;
+            foreach (DataRow dr in dt.Rows)
+            {
+                row = new Dictionary<string, object>();
+                foreach (DataColumn col in dt.Columns)
+                {
+                    row.Add(col.ColumnName, dr[col]);
+                }
+                rows.Add(row);
+            }
+            return serializer.Serialize(rows);
+        }
+
+        [OperationContract]
+        [Description("Returns Filter2")]
+        [WebInvoke(Method = "GET",
+            BodyStyle = WebMessageBodyStyle.WrappedRequest,
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "ReportFilter2({secToken},{parentID})")]
+        public string GetReportFilter2(string secToken, string parentID)
+        {
+            DataTable dt = new DataTable();
+            DataTable dtUser = new DataTable();
+            dtUser = objUser.viewServiceSecTokenSelectBySecToken1(secToken);
+
+            if (dtUser.Rows.Count == 0)
+            {
+
+            }
+            else
+            {
+                dt = objReport.viewReport_Filter2_By_Filter1(Convert.ToInt32(parentID));
+            }
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+            Dictionary<string, object> row;
+            foreach (DataRow dr in dt.Rows)
+            {
+                row = new Dictionary<string, object>();
+                foreach (DataColumn col in dt.Columns)
+                {
+                    row.Add(col.ColumnName, dr[col]);
+                }
+                rows.Add(row);
+            }
+            return serializer.Serialize(rows);
+        }
+
+        [OperationContract]
+        [Description("Returns ReportFilter3")]
+        [WebInvoke(Method = "GET",
+            BodyStyle = WebMessageBodyStyle.WrappedRequest,
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "ReportFilter3({secToken},{parentID})")]
+        public string GetReportFilter3(string secToken, string parentID)
+        {
+            DataTable dt = new DataTable();
+            DataTable dtUser = new DataTable();
+            dtUser = objUser.viewServiceSecTokenSelectBySecToken1(secToken);
+
+            if (dtUser.Rows.Count == 0)
+            {
+
+            }
+            else
+            {
+                dt = objReport.viewReport_Filter3_By_Filter2(Convert.ToInt32(parentID));
+            }
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+            Dictionary<string, object> row;
+            foreach (DataRow dr in dt.Rows)
+            {
+                row = new Dictionary<string, object>();
+                foreach (DataColumn col in dt.Columns)
+                {
+                    row.Add(col.ColumnName, dr[col]);
+                }
+                rows.Add(row);
+            }
+            return serializer.Serialize(rows);
+        }
+
+        [OperationContract]
+        [Description("Returns ReportFilterResults")]
+        [WebInvoke(Method = "GET",
+            BodyStyle = WebMessageBodyStyle.WrappedRequest,
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "ReportFilterResults({secToken},{clientID},{cfId},{specificID})")]
+        public string GetReportFilterResults(string secToken, string clientID, string cfId, string specificID)
+        {
+            DataTable dt = new DataTable();
+            DataTable dtUser = new DataTable();
+            dtUser = objUser.viewServiceSecTokenSelectBySecToken1(secToken);
+
+            if (dtUser.Rows.Count == 0)
+            {
+
+            }
+            else
+            {
+                dt = objReport.viewReport_Result(Convert.ToInt32(clientID), Convert.ToInt32(cfId), Convert.ToInt32(specificID));
+            }
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+            Dictionary<string, object> row;
+            foreach (DataRow dr in dt.Rows)
+            {
+                row = new Dictionary<string, object>();
+                foreach (DataColumn col in dt.Columns)
+                {
+                    row.Add(col.ColumnName, dr[col]);
+                }
+                rows.Add(row);
+            }
+            return serializer.Serialize(rows);
+        }
+
+        #endregion
 
         #endregion
 

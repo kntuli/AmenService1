@@ -459,5 +459,50 @@ namespace AmenService1
              return dt;
          }
 
+        #region Report_Filter
+
+        public DataTable ViewReport_Filter1()
+        {
+            csDAL objdal = new csDAL();
+            DataTable dt = new DataTable();
+            dt = objdal.search("procReport_Filter1");
+            return dt;
+        }
+
+        public DataTable viewReport_Filter2_By_Filter1(Int32 parent_ID)
+        {
+            csDAL objdal = new csDAL();
+            DataTable dt = new DataTable();
+            List<csParameterListType> objpar = new List<csParameterListType>();
+            objpar.Add(new csParameterListType("@parentID", SqlDbType.BigInt, parent_ID));
+            dt = objdal.search("procReport_Filter2", objpar);
+            return dt;
+        }
+
+        public DataTable viewReport_Filter3_By_Filter2(Int32 parent_ID)
+        {
+            csDAL objdal = new csDAL();
+            DataTable dt = new DataTable();
+            List<csParameterListType> objpar = new List<csParameterListType>();
+            objpar.Add(new csParameterListType("@parentID", SqlDbType.BigInt, parent_ID));
+            dt = objdal.search("procReport_Filter3", objpar);
+            return dt;
+        }
+
+        public DataTable viewReport_Result(Int32 clientID, Int32 cfId, Int32 specificID)
+        {
+            csDAL objdal = new csDAL();
+            DataTable dt = new DataTable();
+            List<csParameterListType> objpar = new List<csParameterListType>();
+            objpar.Add(new csParameterListType("@Client_ID", SqlDbType.BigInt, clientID));
+            objpar.Add(new csParameterListType("@cfId", SqlDbType.BigInt, cfId));
+            objpar.Add(new csParameterListType("@specific_ID", SqlDbType.BigInt, specificID));
+            dt = objdal.search("procReport_FilterAll_BySP", objpar);
+            return dt;
+        }
+
+
+        #endregion
+
     }
 }
